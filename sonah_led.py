@@ -13,7 +13,7 @@ NUMBER.append('$00 $00 $00 $00 $01 $02 $57 $30 $30 $00 $00 $00 $32 $FD $07 $06 $
 NUMBER.append('$9')
 NUMBER.append('$FE')
 
-IP = '192.168.1.2'
+IP = '10.1.0.4'
 PORT = 8900
 
 # Create and open a socket conection
@@ -75,6 +75,23 @@ def send(hex):
     s.send(arr)
     receive()
 
-#show_text('ERRERRERRERR')
-show_text('I<3S ONAH!!!')
+def exit_message():
+    input("You have not chosen a valid option. Press Enter to exit.")
+    exit()
+
+mode = input("Do you want to write to \n (1) a row \n (2) the whole sign?\n")
+if (mode == "1"):
+    row = input("Which row you want to show text on? [1 - 4]\n")
+    if (row == "1" or row == "2" or row == "3" or row == "4"):
+        text = input("What text would you like to show? (Just the first 3 digits will be shown) \n")
+        show_row(row, text)
+    else:
+        exit_message()
+elif(mode == "2"):
+    text = input("What text should the LED Sign show?\n")
+    show_text(text)
+else:
+    exit_message()
+
+
 
