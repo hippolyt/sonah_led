@@ -19,7 +19,6 @@ PORT = 8900
 # Create and open a socket conection
 # I switched the port to 8900, which resolved the connection refusal error
 s = socket.socket()
-s.settimeout(100)
 s.connect((IP, PORT))
 
 def receive():
@@ -68,8 +67,8 @@ def show(row_index, char1, char2, char3):
     print('HEX command: ' + string)
     send(string)
 
-def send(hex):
-    hex_s = hex.replace(' $', '').replace('$', '')
+def send(hexCmd):
+    hex_s = hexCmd.replace(' $', '').replace('$', '')
     print('cleaned HEX command: ' + str(hex_s))
     arr = bytearray.fromhex(hex_s)
     print('bytearray: ' + str(arr))
@@ -91,5 +90,8 @@ if (mode == "1"):
 elif(mode == "2"):
     text = input("What text should the LED Sign show?\n")
     show_text(text)
+elif(mode == "3"):
+    hexCommand = "00000040010257303000000032FD0706000000919233FE"
+    send(hexCommand)
 else:
     exit_message()
